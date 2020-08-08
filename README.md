@@ -19,16 +19,20 @@ Pass a name for the target and reference(s) (optional). Use str type.
 ```
 Run the read_apertures method to calculate the raw luminosity of the target and reference(s).
 This will populate the following attributes:
-l.target: a list of target luminosity values, one value for each frame in path.
-l.reference: a list of values (for one reference) or a list of lists (one for each reference) of luminosity values, one value per frame per target.
+
+**l.target**: a list of target luminosity values, one value for each frame in path.
+
+**l.reference**: a list of values (for one reference) or a list of lists (one for each reference) of luminosity values, one value per frame per target.
 ```
     l.read_apertures()
 ```
 Calculate the differential magnitude by running the differential_magnitude method.
 By default, method='average'. This will populate the following attributes:
-l.target_magnitude: a list of magnitude values for target. For multiple references, each target magnitude is equal to:
+
+**l.target_magnitude**: a list of magnitude values for target. For multiple references, each target magnitude is equal to:
 > (-2.5)*log_10(target_luminosity/average_of_reference_luminosities)
-l.reference_magnitude:
+
+**l.reference_magnitude**:
   - If using a single reference:
     - This will be a list of 0s, since log_10(1) is 0.
   - Else if using multiple references:
