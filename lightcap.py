@@ -18,28 +18,35 @@ class Lightcurve:
         self.target_pos & self.reference_pos: indicate x and y coordinates of given target and reference(s) objects.
 
         Arguments:
-        path: str, path to a directory which contains '/a-wcs-reduced' fits files.
+        path: str, path to a directory which contains all the fits files to be read.
+
+        Example:
+        l = lightcap.Lightcurve("/path/to/all/files/to/be/used") # Will read all files in this directory
+        l = lightcap.Lightcurve("/path/to/many/files/a-wcs-reduced-*.fit") # Will only read the specified files
         """
-        if type(path) != str:
-            self.path = str(path)
+
+        if "*" in path:
+            fits_path = path
         else:
-            self.path = path
-        self.awcsreduced = self.path+"/a-wcs-reduced-*.fit"
+            fits_path = os.path.join(self.path, "*.fit")
+
+        os.chdir(os.path.dirname(fits_path))
         self.target = [] #target star aperture counts
         self.target_pos = None
         self.reference = [] #reference and checks aperture counts
         self.reference_pos = None
+        self.fits_list = []
 
-        object_list = []
-        os.chdir(self.path)
-
-        for i in glob.glob(self.awcsreduced):
-            object_list.append(i)
-        # print(len(object_list))
+        for i in glob.glob(fits_path):
+            self.fits_list.append(i)
+        self.fits_list.sort()
 
         self.hdu_list = []
-        for i in object_list:
-            self.hdu_list.append(fits.open(i)[0])
+        self.jd_axis = []
+        for i in self.fits_list:
+            hdu = fits.open(i)[0]
+            self.hdu_list.append(hdu)
+            self.jd_axis.append(hdu.header["JD"])
 
 
     def set_target(self, position, radius, name=None):
