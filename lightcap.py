@@ -28,7 +28,7 @@ class Lightcurve:
         if "*" in path:
             fits_path = path
         else:
-            fits_path = os.path.join(self.path, "*.fit")
+            fits_path = os.path.join(path, "*.fit")
 
         os.chdir(os.path.dirname(fits_path))
         self.target = [] #target star aperture counts
