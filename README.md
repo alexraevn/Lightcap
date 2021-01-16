@@ -41,4 +41,8 @@ By default, method='average'. This will populate the following attributes:
 ```
     l.differential_magnitude()
 ```
+
+
+To aide in plotting, a list of the timestamp of the beginning of each data point in Julian Date format is stored as l.jd_axis.
+
 Contact email: alex.re95@gmail.com
