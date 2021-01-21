@@ -125,10 +125,10 @@ class Lightcurve:
         else:
 
             for i in self.hdu_list:
-                target_phot_table = aperture_photometry(i, self.target_aperture) #reading target luminosity
+                target_phot_table = aperture_photometry(i.data, self.target_aperture) #reading target luminosity
                 self.target.append(target_phot_table[0][3])
 
-                phot_table = aperture_photometry(i, self.reference_aperture)
+                phot_table = aperture_photometry(i.data, self.reference_aperture)
                 if self.number_of_references == 1: #reading only one reference object
                     self.reference.append(phot_table[0][3])
                 elif self.number_of_references > 1: #reading multiple references
