@@ -5,7 +5,8 @@ Usage example for Lx Ser using coordinates from frames taken 07/31/2020:
 ```
     import lightcap
 ```
-Instantiate a Lightcurve class:
+Instantiate a Lightcurve class.
+Pass a path to your data directory as str type. Specify files using wildcard, e.g. _"/path/to/data/a-wcs-reduced-\*.fit"_. Otherwise, all fit files in directory will be read. 
 ```
     l = lightcap.Lightcurve(path)
 ```
